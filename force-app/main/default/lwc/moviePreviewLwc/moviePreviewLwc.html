@@ -1,3 +1,30 @@
 <template>
-    
+  <div class={sidebarClass}>
+    <div if:true={movie} class="Preview">
+      <!-- Movie preview section -->
+        <div class="preview-container" if:true={movie}>
+          <div class="preview-image">
+            <img src="https://media.istockphoto.com/id/1406127371/photo/women-wearing-3d-glasses-watching-a-movie-and-her-giant-popcorn-3d-render-illustration.jpg?b=1&s=170667a&w=0&k=20&c=sOe1e0SkxCmB6HsDN_NbzH9hPGhQpzXAXesWs2a7jTA=" alt="">
+          </div>
+          <div class="preview-content">
+            <h1>{movie.Name}</h1>
+            <p>{movie.Description__c}</p>
+            <p>{movie.Category__c}</p>
+            <p>{movie.Release_date__c}</p>
+            <div class="btn-container">
+              <button class="Edit" onclick={handleEdit}>Edit</button>
+              <button class="Delete" onclick={handleDelete}>Delete</button>
+            </div>
+          </div>
+        </div>
+
+        <c-modal-edit-movie 
+        record-id={movie.Id} 
+        object-api-name="Movie__c" 
+        is-modal-open={isModalOpen}
+        onsuccess={handleSuccess}
+        onclose={handleClose}>
+      </c-modal-edit-movie>
+      </div>
+    </div>
 </template>

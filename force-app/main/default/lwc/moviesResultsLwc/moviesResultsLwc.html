@@ -1,3 +1,32 @@
 <template>
-    
+      <div class="movie-filter">
+        <lightning-input  type="search" placeholder="Search ..." onchange={handleInputChange} value={searchKey}></lightning-input>
+    </div>
+      <!-- Movies results section -->
+      <div class="layout-container">
+          <div class={contentClass}>
+              <!-- Main content goes here -->
+              <template lwc:if={isEmpty}>
+                <p>No movie found.</p>
+              </template>
+              <template lwc:if={movies.data} >
+                <div class="slds-grid slds-wrap movies-container">
+                  <template for:each={movies.data} for:item="movie">
+                    <c-tile class="movie-card" key={movie.Id} movie={movie} onmovieselect={handleMovie}></c-tile>
+                  </template>
+                </div>
+            </template>
+          </div>
+          <div class={sidebarClass}>
+            <!-- Sidebar content goes here -->
+            <lightning-icon
+                icon-name="utility:close"
+                size="xx-small"
+                alternative-text="Close Sidebar"
+                onclick={handleCloseSidebar}
+                class="close">
+              </lightning-icon>
+            <c-movie-preview-lwc onclose={handleCloseSidebar} movie={movie}></c-movie-preview-lwc>
+        </div>
+      </div>
 </template>

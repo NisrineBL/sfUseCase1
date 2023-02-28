@@ -1,8 +1,12 @@
 <template>
-    <div class="button-container">
-        <lightning-button  label="New Movie" title="Create new movie" onclick={handleClick} class=""></lightning-button>
-    </div>
-    <div class="filter-container">
-        <lightning-input placeholder="Search..." value={movie} onchange={changeHandler}></lightning-input>
-    </div>
+    <lightning-card>
+        <div class="filter-container">
+            <c-new-movie-modal-lwc show-modal={showModal} onclose={handleClose} oncreate={handleCreate}></c-new-movie-modal-lwc>
+            <div class="create-movie-btn">
+                <button class="new-btn" onclick={handleNewMovie}>New Movie</button>
+            </div>
+            <c-movies-results-lwc></c-movies-results-lwc>
+        </div>
+</lightning-card>
+
 </template>
