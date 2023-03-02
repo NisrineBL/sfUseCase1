@@ -1,0 +1,12 @@
+<template>
+    <lightning-card>
+        <div class="filter-container">
+            <c-new-movie-modal-lwc show-modal={showModal} onclose={handleClose} oncreate={handleCreate}></c-new-movie-modal-lwc>
+            <div class="create-movie-btn">
+                <button class="new-btn" onclick={handleNewMovie}>New Movie</button>
+            </div>
+            <c-movies-results-lwc></c-movies-results-lwc>
+        </div>
+</lightning-card>
+
+</template>
