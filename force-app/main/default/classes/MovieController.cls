@@ -9,6 +9,7 @@ public with sharing class MovieController {
           movie.put('Description__c', payloadMovie.description);
           movie.put('Category__c', payloadMovie.category);
           movie.put('Release_date__c', payloadMovie.releaseDate);
+        // check if it's Createbale Acess
           insert movie;
           return String.valueOf(movie.Id);
         } catch (Exception e) {
@@ -19,6 +20,7 @@ public with sharing class MovieController {
     @AuraEnabled(cacheable=true)
     public static List<Movie__c> getMovies(){
         try {
+            // check if it's readable Acess
             return[
                 SELECT Name, Description__c, Release_date__c, Category__c
                 FROM Movie__c

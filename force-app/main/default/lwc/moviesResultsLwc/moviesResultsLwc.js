@@ -5,14 +5,13 @@ import {refreshApex} from '@salesforce/apex';
 const DELAY = 300;
 export default class MoviesResultsLwc extends LightningElement {
 
-    @track movie;
-    @track sidebarVisible = false;
-
-    searchKey = '';
-
     @wire(getMovies) movies;
     @wire(findMovies, { searchKey: '$searchKey' })
     movies;
+    @track movie;
+    @track sidebarVisible = false;
+    searchKey = '';
+
 
     handleInputChange(event) {
         window.clearTimeout(this.delayTimeout);
@@ -26,6 +25,7 @@ export default class MoviesResultsLwc extends LightningElement {
         this.movie= event.detail;
         this.sidebarVisible = true; 
     }
+    
     get isEmpty() {
         return this.movies?.data?.length == 0;
     }

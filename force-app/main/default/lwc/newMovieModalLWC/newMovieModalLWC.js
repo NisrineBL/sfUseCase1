@@ -4,10 +4,6 @@ import addMovie from "@salesforce/apex/movieController.addMovie";
 import MOVIE_CATEGORY from "@salesforce/schema/Movie__c.Category__c";
 import getActors from "@salesforce/apex/actorsController.getActors";
 import addMovieActor from "@salesforce/apex/movieActor.addMovieActor";
-import deleteMovieActor from "@salesforce/apex/movieActor.deleteMovieActor";
-import getMovieActors from "@salesforce/apex/movieActor.getMovieActors";
-import actorsDummy from "@salesforce/resourceUrl/actors";
-
 
 export default class NewMovieModalLwc extends LightningElement {
   @track movieName;
@@ -59,7 +55,7 @@ export default class NewMovieModalLwc extends LightningElement {
     };
     const movieID = this.createMovie(JSON.stringify(movie));
     movieID.then((movieID) => {
-      console.log("movie inserted : " + movieID);
+      // console.log("movie inserted : " + movieID);
       this.dispatchEvent(new CustomEvent("create", {detail : {id: movieID}}));
       const payload = {
         movie: movieID,

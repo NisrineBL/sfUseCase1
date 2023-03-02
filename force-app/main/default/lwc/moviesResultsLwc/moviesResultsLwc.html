@@ -9,7 +9,7 @@
               <template lwc:if={isEmpty}>
                 <p>No movie found.</p>
               </template>
-              <template lwc:if={movies.data} >
+            <template lwc:if={movies.data} >
                 <div class="slds-grid slds-wrap movies-container">
                   <template for:each={movies.data} for:item="movie">
                     <c-tile class="movie-card" key={movie.Id} movie={movie} onmovieselect={handleMovie}></c-tile>
