@@ -17,8 +17,12 @@ export default class NewMovieModalLwc extends LightningElement {
   @track selectedMovieActors = [];
 
   connectedCallback() {
+    //Can't wire getActor
+    //Leverage async await
     getActors().then((actors) => {
+      //forEach
       // load just 25 actor for testing
+      //truncate
       for (let i = 0; i < 25; i++) {
         this.actors = [
           ...this.actors,
@@ -29,7 +33,7 @@ export default class NewMovieModalLwc extends LightningElement {
   }
   // retrieving movie categories picklist with a dummy recordType id.
   @wire(getPicklistValues, {
-    recordTypeId: "012000000000000AAA",
+    recordTypeId: "012000000000000AAA",//you can get it with the standard method
     fieldApiName: MOVIE_CATEGORY
   })
   wiredPickListValue({ data, error }) {
@@ -37,13 +41,13 @@ export default class NewMovieModalLwc extends LightningElement {
       this.movieCategories = data.values;
     }
     if (error) {
-      this.movieCategories = [];
+      this.movieCategories = [];//initialize the array to avoid undefined
     }
   }
   // Function to close modal
   closeModal() {
     this.dispatchEvent(new CustomEvent("close"));
-    this.selectedMovieActors = [];
+    this.selectedMovieActors = [];//no need
   }
   // Function to submit modal form data
   submitMovie(e) {
@@ -54,6 +58,7 @@ export default class NewMovieModalLwc extends LightningElement {
       releaseDate: this.releaseDate
     };
     const movieID = this.createMovie(JSON.stringify(movie));
+    //asyn await
     movieID.then((movieID) => {
       // console.log("movie inserted : " + movieID);
       this.dispatchEvent(new CustomEvent("create", {detail : {id: movieID}}));
@@ -74,8 +79,8 @@ export default class NewMovieModalLwc extends LightningElement {
   }
 
   addSelectedActor() {
-    const picklist = this.template.querySelector('[data-id="actrs"]');
-    if (picklist.value) {
+    const picklist = this.template.querySelector('[data-id="actrs"]');//class or tag name
+    if (picklist.value) {//check if picklist is null(safe operator)
       const uniques = new Set(this.selectedMovieActors);
       if (!uniques.has(picklist.value)) {
         this.selectedMovieActors.push(picklist.value);

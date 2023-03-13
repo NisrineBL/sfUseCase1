@@ -3,7 +3,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class FilterMoviesLwc extends LightningElement {
     @track showModal = false;
-
+    //no need for track
     handleCreate(event) {
         const toastEvent = new ShowToastEvent({
             title: "Your Movie has been created",

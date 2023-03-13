@@ -19,6 +19,7 @@ export default class MoviePreviewLwc extends NavigationMixin(LightningElement) {
     console.log(nav);
   }
 
+  //Custom labels
   handleDelete(event) {
     deleteRecord(this.movie.Id)
             .then(() => {
